@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from .form import PostForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -28,8 +29,8 @@ def post_new(request):
         form= PostForm(request.POST, request.FILES)
         if form.is_valid():
             post=form.save(commit=False)
-            post.author = reuqest.user
-            #post.save()
+            post.author = request.user
+            post.save()
             #post.tag_save()
             messages.info(request,'새 글이 등록되었습니다.')
             return redirect('post:post_list')
@@ -49,7 +50,7 @@ def post_edit(request,pk):
         form=PostForm(request.POST, request.FILES,instance=post)
         if form.is_valid():
             post = form.save()
-            #post.taf_set.clear()
+            #post.tag_set.clear()
             #post.tag_save()
             messages.success(request, '수정완료')
             return redirect('post:post_list')
