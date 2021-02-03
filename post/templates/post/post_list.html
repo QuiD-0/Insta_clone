@@ -7,6 +7,20 @@
 {% endblock %}
 
 {% block content %}
+<!-- hidden -->
+    <div class="hidden_menu">
+        <div class="scroll_inner">
+            {% for following in user.profile.get_following %}
+            <div class="user">
+                <div class="thumb_img"><img src="{{ following.picture.url }}" alt="프로필사진"></div>
+                <div class="id">{{following.nickname}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+<!-- main -->
 <section id="main_container">
             <div class="inner">
                 <div class="contents_box">
@@ -30,9 +44,22 @@
 
                             <div class="sprite_more_icon" data-name="more">
                                 <ul class="toggle_box">
-                                    <li><input type="submit" class="follow" value="팔로우" data-name="follow"></li>
-                                    <li>수정</li>
-                                    <li>삭제</li>
+                                    <li>
+                                        {% if user.profile in post.author.profile.get_follower %}
+                                        <input type="submit" class="follow" value="팔로우 취소" data-name="follow" name={{post.author.profile.id}}>
+                                        {% else %}
+                                        <input type="submit" class="follow" value="팔로우" data-name="follow" name={{post.author.profile.id}}>
+                                        {% endif %}
+                                    </li>
+                                    {% if post.author == user %}
+                                    <li><a href="{% url 'post:post_edit' post.pk %}" class ="post-edit"></a>수정</li>
+                                    <li>
+                                        <form action="{% url 'post:post_delete' post.pk %}" class="post-delete-form" method="post">
+                                            {% csrf_token %}
+                                            <input type="submit" class="post-delete" value="삭제">
+                                        </form>
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </header>
@@ -146,15 +173,19 @@
                         </header>
 
                         <div class="scroll_inner">
+                            {% if follow_post_list %}
+                            {% for post in follow_post_list %}
                             <div class="thumb_user">
                                 <div class="profile_thumb">
-                                    <img src="imgs/thumb02.jpg" alt="프로필사진">
+                                    <img src="{{ post.photo.url }}" alt="프로필사진">
                                 </div>
                                 <div class="detail">
-                                    <div class="id">kind_tigerrrr</div>
-                                    <div class="time">1시간 전</div>
+                                    <div class="id">{{post.content}}</div>
+                                    <div class="time">{{post.updated_at|timesince}}</div>
                                 </div>
                             </div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </article>
 
@@ -163,16 +194,17 @@
                             <div>회원님을 위한 추천</div>
                             <div class="more">모두 보기</div>
                         </header>
-
+                        {% for post in posts %}
                         <div class="thumb_user">
                             <div class="profile_thumb">
-                                <img src="imgs/thumb02.jpg" alt="프로필사진">
+                                <img src="{{ post.photo.url }}" alt="프로필사진">
                             </div>
                             <div class="detail">
-                                <div class="id">kind_tigerrrr</div>
-                                <div class="time">1시간 전</div>
+                                <div class="id">{{post.content}}</div>
+                                <div class="time">{{post.updated_at|timesince}}</div>
                             </div>
                         </div>
+                        {% endfor %}
                     </article>
                 </div>
 
