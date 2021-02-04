@@ -1,30 +1,6 @@
-{% extends "post/layout.html" %}
 {% load static %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/common.css' %}">
-{% endblock %}
-
-{% block content %}
-<!-- hidden -->
-    <div class="hidden_menu">
-        <div class="scroll_inner">
-            {% for following in user.profile.get_following %}
-            <div class="user">
-                <div class="thumb_img"><img src="{{ following.picture.url }}" alt="프로필사진"></div>
-                <div class="id">{{following.nickname}}</div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-
-<!-- main -->
-<section id="main_container">
-            <div class="inner">
-                <div class="contents_box">
-                    {% for post in posts  %}
+{% for post in posts  %}
                     <article class="contents">
                         <header class="top">
                             <div class="user_container">
@@ -138,84 +114,10 @@
                             <input type="text" placeholder="댓글달기...">
                             <div class="upload_btn m_text" data-name="comment" name="{{post.id}}">게시</div>
                             {% else %}
-                            {{comment_form}}
+                            {{ comment_form }}
                             <input type="text" placeholder="댓글달기...">
                             <div class="upload_btn m_text" data-name="comment" name="{{post.id}}" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.')">게시</div>
                             {% endif %}
                         </div>
                     </article>
                     {% endfor %}
-                    <div id="post_list_ajax"></div>
-                    <input type="hidden" id="page" value="2">
-                </div>
-
-                <div class="side_box">
-                    {% if user_profile %}
-                    <div class="user_profile">
-                        <div class="profile_thumb">
-                            <img src="{{user_profile.picture.url}}" alt="프로필사진">
-                        </div>
-                        <div class="detail">
-                            <div class="id m_text">{{user_profile.user}}</div>
-                            <div class="ko_name">{{user_profile.nickname}}</div>
-                        </div>
-                    </div>
-                    {% else %}
-                    <div class="user_profile">
-                        <div class="profile_thumb">
-                            <img src="{% static 'imgs/thumb.jpeg'%}" alt="프로필사진">
-                        </div>
-                        <div class="detail">
-                        </div>
-                    </div>
-                    {% endif %}
-                    <article class="story">
-                        <header class="story_header">
-                            <div>스토리</div>
-                            <div class="more">모두 보기</div>
-                        </header>
-
-                        <div class="scroll_inner">
-                            {% if follow_post_list %}
-                            {% for post in follow_post_list %}
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="{{ post.photo.url }}" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="time">{{post.content}}</div>
-                                    <div class="time">{{post.updated_at|timesince}}</div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                    </article>
-
-                    <article class="recommend">
-                        <header class="reco_header">
-                            <div>회원님을 위한 추천</div>
-                            <div class="more">모두 보기</div>
-                        </header>
-                        {% for post in posts %}
-                        {% if post not in follow_post_list and post.author != user %}
-                        <div class="thumb_user">
-                            <div class="profile_thumb">
-                                <img src="{{ post.photo.url }}" alt="프로필사진">
-                            </div>
-                            <div class="detail">
-                                <div class="id">{{post.author}}</div>
-                                <div class="time">{{post.content}} {{post.updated_at|timesince}}</div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-                    </article>
-                </div>
-
-
-            </div>
-        </section>
-
-{% include "post/script_ajax.html"%}
-{% endblock %}

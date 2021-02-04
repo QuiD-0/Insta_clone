@@ -47,7 +47,7 @@
         <section class="h_inner">
 
             <h1 class="logo">
-                <a href="#">
+                <a href="{% url 'post:post_list' %}">
                     <div class="sprite_insta_icon"></div>
                     <div>
                         <div class="sprite_write_logo"></div>
@@ -68,7 +68,7 @@
 
 
             <div class="right_icons">
-                <div class="sprite_camera_icon"><a href="#"></a></div>
+                <div class="sprite_camera_icon"><a href="{% url 'post:post_new' %}"></a></div>
                 <div class="sprite_compass_icon"><a href="#"></a></div>
                 <div class="sprite_heart_icon_outline"><a href="#"></a></div>
 
@@ -78,7 +78,7 @@
 
                 {% else %}
 
-                <div class="sprite_user_icon_outline"><a href="#"></a></div>
+                <div class="sprite_user_icon_outline"><a href="{% url 'accounts:login' %}"></a></div>
 
                 {% endif %}
             </div>
