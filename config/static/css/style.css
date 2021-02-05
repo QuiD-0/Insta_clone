@@ -260,6 +260,10 @@ body{
     color:#262626;
 }
 
+.contents .content{
+    padding: 5px 20px;
+}
+
 
 .contents .comment_container{
     display:flex;
