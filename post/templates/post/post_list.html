@@ -1,5 +1,6 @@
 {% extends "post/layout.html" %}
 {% load static %}
+{% load tags_extras %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -96,7 +97,7 @@
                             <div class="comment">
                                 <div class="comment-detail">
                                     <div class="nick_name m_text">{{ post.author.profile.nickname }} </div>
-                                    <div>{{ post.content }}</div>
+                                    <div>{{ post | add_link | safe | linebreaksbr }}</div>
                                 </div>                                
                             </div>
                             <div class="small_heart">
