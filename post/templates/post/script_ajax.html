@@ -3,10 +3,9 @@
    const delegation = document.querySelector('.contents_box');
     
     function delegationFunc(e){
-        let elem=e.target;
-        
+        let elem = e.target;
         while(!elem.getAttribute('data-name')){
-            elem = elem.parentNode;
+            elem - elem.parentNode;
             if (elem.nodeName === 'BODY'){
                 elem=null;
                 return;
@@ -41,10 +40,8 @@
             
             
         }else if (elem.matches('[data-name="bookmark"]')){
-            console.log('북마크!');
 
             var pk = elem.getAttribute('name');
-            console.log(pk);
 
             $.ajax({
                 type: "POST",
@@ -121,7 +118,7 @@
                 dataType:'json',
                 success:function(response){
                     if(response.status){
-                        document.querySelector('input.follow[name=\''+pk+'\']').value="팔로잉"
+                        document.querySelector('input.follow[name=\''+pk+'\']').value="팔로우 취소"
                     }
                     else{
                         document.querySelector('input.follow[name=\''+pk+'\']').value="팔로우"

@@ -14,7 +14,7 @@ class PostForm(forms.ModelForm):
         fields = ['photo','content']
         
 class CommentForm(forms.ModelForm):
-    forms.CharField(label='',widget=forms.TextInput(attrs={'class':'comment-form','size':'70px','placeholder':'댓글 달기...','maxlength':'40',}))
+    content=forms.CharField(label='',widget=forms.TextInput(attrs={'class':'comment-form','size':'70px','placeholder':'댓글 달기...','maxlength':'40',}))
     class Meta:
         model=Comment
         fields = ['content']

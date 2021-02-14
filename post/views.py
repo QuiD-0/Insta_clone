@@ -11,10 +11,19 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count
 
 
-# Create your views here.
+def post_detail(request,pk):
+    post = get_object_or_404(Post,pk=pk)
+    comment_form=CommentForm()
+    return render(request,'post/post_detail.html',{
+        'post':post,
+        'comment_form':comment_form,
+    })
+    
+
+
 def post_list(request, tag=None):
     tag_all = Tag.objects.annotate(num_post=Count('post')).order_by('-num_post')
-    
+    comment_form = CommentForm()
     if tag:
         post_list = Post.objects.filter(tag_set__name__iexact=tag) \
             .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile',
@@ -39,6 +48,7 @@ def post_list(request, tag=None):
     if request.is_ajax():
         return render(request, 'post/post_list_ajax.html', {
             'posts': posts,
+            'comment_form':comment_form,
         })
     
     if request.method == 'POST':
@@ -62,12 +72,14 @@ def post_list(request, tag=None):
             'posts': posts,
             'follow_post_list': follow_post_list,
             'tag_all': tag_all,
+            'comment_form':comment_form,
         })
     else:
         return render(request, 'post/post_list.html', {
             'tag': tag,
             'posts': posts,
             'tag_all': tag_all,
+            'comment_form':comment_form,
         })
     
 @login_required
