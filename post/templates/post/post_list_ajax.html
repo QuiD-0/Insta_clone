@@ -71,7 +71,6 @@
                          <div class="comment_container">
                             <div class="comment">
                                 <div class="comment-detail">
-                                    <div class="nick_name m_text">{{ post.author.profile.nickname }} </div>
                                     <div>{{ post.content }}</div>
                                 </div>                                
                             </div>
@@ -111,11 +110,9 @@
                         <div class="comment_field" id="add-comment-post{{post.id}}">
                             {% if user.is_authenticated %}
                             {{ comment_form }}
-                            <input type="text" placeholder="댓글달기...">
                             <div class="upload_btn m_text" data-name="comment" name="{{post.id}}">게시</div>
                             {% else %}
                             {{ comment_form }}
-                            <input type="text" placeholder="댓글달기...">
                             <div class="upload_btn m_text" data-name="comment" name="{{post.id}}" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.')">게시</div>
                             {% endif %}
                         </div>

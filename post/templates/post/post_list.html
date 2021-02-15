@@ -82,7 +82,7 @@
                                     <div class="sprite_heart_icon_outline" name="{{ post.id }}" data-name="heartbeat"></div>
                                     {% endif %}
                                 </div>
-                                <a href="{% url 'post:post_detail' post.pk %}">
+                                <a href="{% url 'post:post_detail' post.pk %}" class="bubble">
                                     <div class="sprite_bubble_icon"></div>
                                 </a>
                                 <div class="sprite_share_icon" data-name="share"></div>
@@ -98,7 +98,6 @@
                          <div class="comment_container">
                             <div class="comment">
                                 <div class="comment-detail">
-                                    <div class="nick_name m_text">{{ post.author.profile.nickname }} </div>
                                     <div>{{ post | add_link | safe | linebreaksbr }}</div>
                                 </div>                                
                             </div>
@@ -141,7 +140,7 @@
                             <div class="upload_btn m_text" data-name="comment" name="{{post.id}}">게시</div>
                             {% else %}
                             {{comment_form}}
-                            <div class="upload_btn m_text" data-name="comment" name="{{post.id}}" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.')">게시</div>
+                            <div class="upload_btn m_text" name="{{post.id}}" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.')">게시</div>
                             {% endif %}
                         </div>
                     </article>

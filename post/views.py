@@ -18,6 +18,24 @@ def post_detail(request,pk):
         'post':post,
         'comment_form':comment_form,
     })
+
+def my_post_list(request,username):
+    user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
+    target_user = get_user_model().objects.filter(id=user.id).select_related('ProcessLookupError')\
+    .prefetch_related('profile__follower_user__from_user','profile__follw_user__to_user')
+    
+    post_list = user.post_set.all()
+    all_post_list = Post.objects.all()
+    
+    return render(request, 'post/my_post_list.html',{
+        'user_profile':user_profile,
+        'target_user':target_user,
+        'post_list':post_list,
+        'all_post_list':all_post_list,
+        'username':username,
+    })
+    
     
 
 
@@ -183,7 +201,7 @@ def comment_new(request):
             comment.post=post 
             comment.save()
             return render(request,'post/comment_new_ajax.html',{'comment':comment,})
-        return redirect('post:post_list')
+    return redirect('post:post_list')
     
 
 @login_required 

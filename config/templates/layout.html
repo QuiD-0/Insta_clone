@@ -74,7 +74,7 @@
 
                 {% if user.is_authenticated %}
 
-                <div class="sprite_user_icon_outline"><a href="#"></a></div>
+                <div class="sprite_user_icon_outline"><a href="{% url 'post:my_post_list' user.username %}"></a></div>
 
                 {% else %}
 
@@ -90,7 +90,6 @@
 
 </section>
 
-    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- <script src="{% static 'js/insta.js' %}"></script> -->
     {% block js %}
