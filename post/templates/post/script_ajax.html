@@ -4,13 +4,6 @@
     
     function delegationFunc(e){
         let elem = e.target;
-        while(!elem.getAttribute('data-name')){
-            elem - elem.parentNode;
-            if (elem.nodeName === 'BODY'){
-                elem=null;
-                return;
-            }
-        }
         
         if (elem.matches('[data-name="heartbeat"]')){
             console.log('하트!');

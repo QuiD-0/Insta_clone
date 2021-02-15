@@ -196,6 +196,23 @@ def comment_delete(request):
     else:
         status=0
     return HttpResponse(json.dumps({'status':status}),content_type="application/json")
+
+
+
+@login_required 
+def comment_detail_new(request):
+    pk=request.POST.get('pk')
+    post = get_object_or_404(Post,pk=pk)
+    if request.method=="POST":
+        form=CommentForm(request.POST)
+        if form.is_valid():
+            comment=form.save(commit=False)
+            comment.author =request.user
+            comment.post=post 
+            comment.save()
+            return render(request,'post/comment_detail_new_ajax.html',{'comment':comment})
+        return redirect('post:post_list')
+
     
     
     

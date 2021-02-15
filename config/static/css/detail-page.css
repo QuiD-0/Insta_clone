@@ -141,8 +141,8 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
-.scroll_section .admin_container{
-    margin-bottom: 10px;
+.admin_container{
+    padding:12px 16px;
 }
 
 .scroll_section .user_container-detail{

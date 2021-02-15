@@ -1,0 +1,21 @@
+<div class="user_container-detail" id="comment-list-ajax-post{{comment.id}}">
+                                <div class="user"><img src="{{comment.author.profile.picture.url}}" alt="user"></div>
+                                <div class="comment">
+                                    <span class="user_id">{{comment.author.profile.nickname}}</span>
+                                    <span>{{comment.content}}</span>
+                                    <span>
+                                    {% if user == comment.author %}
+                                    <input type="button" class="del-comment" data-name="comment_delete" value="삭제" name="{{ comment.id }}">
+                                    {% endif %}
+                                    </span>
+                                    <div class="time">{{comment.created_at|timesince}} <span class="try_comment">답글 달기</span></div>
+                                    <div class="icon_wrap">
+                                        <div class="more_trigger">
+                                            <div class="sprite_more_icon"></div>
+                                        </div>
+                                        <div>
+                                            <div class="sprite_small_heart_icon_outline"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
