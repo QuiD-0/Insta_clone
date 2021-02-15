@@ -1,1 +1,1 @@
-web: gunicorn quid-insta.wsgi --log-file -
+web: manage.py runserver 0:80
