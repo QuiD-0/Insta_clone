@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'accounts',
     'post',
+    'rest_framework',
+    'rest_framework_swagger',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
