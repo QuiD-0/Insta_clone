@@ -21,7 +21,7 @@ class Profile(models.Model):
                                        symmetrical=False,)
     
     
-    picture = ProcessedImageField(upload_to=user_path,
+    picture = models.ImageField(upload_to=user_path,
                                   processors=[ResizeToFill(150,150)],
                                   format='JPEG',
                                   options={'quality':90},
