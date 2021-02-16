@@ -1,8 +1,14 @@
 from django import forms
 from .models import Post,Comment
+from cloudinary.forms import CloudinaryFileField
 
 class PostForm(forms.ModelForm):
-    photo = forms.ImageField(label='',required=False)
+    photo = CloudinaryFileField(options = {
+            'crop': 'thumb',
+            'width': 600,
+            'height': 600,
+            'folder': 'photo'
+       })
     content= forms.CharField(label='',widget=forms.Textarea(attrs={
         'class':'post-new-content',
         'rows':5,

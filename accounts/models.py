@@ -2,6 +2,8 @@ from django.conf import settings
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from cloudinary.models import CloudinaryField
+
 # Create your models here.
 def user_path(instance,filename):
     from random import choice
@@ -21,12 +23,7 @@ class Profile(models.Model):
                                        symmetrical=False,)
     
     
-    picture = ProcessedImageField(upload_to=user_path,
-                                  processors=[ResizeToFill(150,150)],
-                                  format='JPEG',
-                                  options={'quality':90},
-                                  blank=True,
-                                 )
+    picture = CloudinaryField('picture', blank=True)
     
     about = models.CharField(max_length=300, blank=True)
     GENDER_C = (

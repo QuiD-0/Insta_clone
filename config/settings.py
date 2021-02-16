@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import cloudinary
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,7 +45,15 @@ INSTALLED_APPS = [
     'allauth.account',
     'accounts',
     'post',
+    'cloudinary',
 ]
+
+cloudinary.config(
+  cloud_name = os.environ.get('hhb0sfo1h'),
+  api_key = os.environ.get('891951376918184'),
+  api_secret = os.environ.get('a6FTfb4w8-nEQ3StM0IQTlaRhAU'),
+  secure = True
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

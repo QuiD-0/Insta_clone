@@ -3,6 +3,7 @@ from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 import re
+from cloudinary.models import CloudinaryField
 
 def photo_path(instance,filename):
     from time import strftime
@@ -15,10 +16,7 @@ def photo_path(instance,filename):
     
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    photo = ProcessedImageField(upload_to=photo_path,
-                                processors=[ResizeToFill(600, 600)],
-                                format='JPEG',
-                                options={'quality': 90})
+    photo = CloudinaryField('photo', blank=True)
     content = models.CharField(max_length=140, help_text="최대 140자 입력 가능")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

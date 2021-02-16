@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import Profile
+from cloudinary.forms import CloudinaryFileField
 
 class LoginForm(forms.ModelForm):
     class Meta:
@@ -16,7 +17,12 @@ class SignupForm(UserCreationForm):
         'title' : '특수분자, 공백 입력불가',
     }))
     nickname=forms.CharField(label="닉네임")
-    picture=forms.ImageField(label='프로필사진',required=False)
+    picture=CloudinaryFileField(options = {
+            'crop': 'thumb',
+            'width': 150,
+            'height': 150,
+            'folder': 'picture'
+       })
     
     class Meta(UserCreationForm.Meta):
         UserCreationForm.Meta.fields + ('email',)
