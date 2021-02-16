@@ -1,5 +1,5 @@
 # Insta_clone
-Django 인스타그램 클론 프로젝트
+Django 인스타그램 클론 프로젝트   
 Heroku에서 배포중입니다.
 
 
